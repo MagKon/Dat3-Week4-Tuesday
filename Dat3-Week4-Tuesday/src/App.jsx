@@ -11,14 +11,14 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
-          <Route path="/books" element={<Books />}>
+          <Route path="/" element={<Books />}>
             <Route path=":id" element={<Book />} />
             <Route path="addbook" element={<AddBook />} />
           </Route>
         </Routes>
       </BrowserRouter>
-      <Header />
     </>
   );
 }

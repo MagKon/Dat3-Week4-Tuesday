@@ -1,9 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import bookFacade from "../facade/bookFacade";
 import { useParams } from "react-router-dom";
 
 function Book() {
   const { id } = useParams();
+  const book = bookFacade.findBook(id);
 
   return (
     <>
@@ -11,7 +13,9 @@ function Book() {
       <div className="container">
         <div className="card">
           <div className="card-body">
-            <p>Book id: {id}</p>
+            <p>Book id: {book.id}</p>
+            <p>Book title: {book.title}</p>
+            <p>Book info: {book.info}</p>
           </div>
         </div>
       </div>

@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bookFacade from "../facade/bookFacade";
 import { Link, Outlet } from "react-router-dom";
 
 function Books() {
-  const [books] = useState(bookFacade.getBooks());
+  const [books, setBooks] = useState(bookFacade.getBooks());
+  useEffect(() => {
+    setBooks(bookFacade.getBooks());
+  }, [books]);
+
   return (
     <>
       <h1>Books</h1>
@@ -29,7 +33,7 @@ function Books() {
           })}
         </tbody>
       </table>
-      <Outlet />
+      <Outlet context={[books, setBooks]} />
     </>
   );
 }

@@ -1,13 +1,17 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import bookFacade from "../facade/bookFacade";
+import { useOutletContext } from "react-router-dom";
 
 function AddBook() {
+  const [books, setBooks] = useOutletContext() || [];
+
   function addBook() {
     const title = document.getElementById("title").value;
     const info = document.getElementById("info").value;
     const book = { title, info };
     bookFacade.addBook(book);
+    setBooks([...books, book]);
   }
 
   return (
