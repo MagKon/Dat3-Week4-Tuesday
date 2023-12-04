@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import bookFacade from "../facade/bookFacade";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 function Books() {
   const [books, setBooks] = useState(bookFacade.getBooks());
@@ -23,9 +23,19 @@ function Books() {
             return (
               <tr key={book.id}>
                 <td>
-                  <Link to={"" + book.id} relative="path">
+                  <NavLink
+                    to={"" + book.id}
+                    relative="path"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending nav-link"
+                        : isActive
+                        ? "active nav-link"
+                        : "nav-link"
+                    }
+                  >
                     {book.title}
-                  </Link>
+                  </NavLink>
                 </td>
                 <td>{book.info}</td>
               </tr>

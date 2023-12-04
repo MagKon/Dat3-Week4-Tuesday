@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Header() {
   const [search, setSearch] = React.useState("");
@@ -35,18 +35,33 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link
+                <NavLink
                   to="/books"
-                  className="nav-link active"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending nav-link"
+                      : isActive
+                      ? "active nav-link"
+                      : "nav-link"
+                  }
                   aria-current="page"
                 >
                   Books
-                </Link>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/books/addbook" className="nav-link">
+                <NavLink
+                  to="/books/addbook"
+                  className={({ isActive, isPending }) =>
+                    isPending
+                      ? "pending nav-link"
+                      : isActive
+                      ? "active nav-link"
+                      : "nav-link"
+                  }
+                >
                   Add a book
-                </Link>
+                </NavLink>
               </li>
             </ul>
             <form className="d-flex" role="search">
