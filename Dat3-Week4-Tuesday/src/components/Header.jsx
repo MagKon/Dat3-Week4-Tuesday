@@ -1,13 +1,12 @@
 import React from "react";
-import { Link, NavLink, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header() {
-  function searchBooks(event) {
-    event.preventDefault();
-    const search = document.getElementById("search").value;
+  const [search, setSearch] = React.useState("");
+  function searchBooks() {
+    const search = document.getElementById("search")?.value ?? "";
     if (search !== "") {
-      let location = "/" + search;
-      window.location.href = location;
+      return search;
     }
   }
 
@@ -16,6 +15,7 @@ function Header() {
       <nav
         className="navbar navbar-expand-lg bg-body-tertiary"
         style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
@@ -35,12 +35,16 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">
+                <Link
+                  to="/books"
+                  className="nav-link active"
+                  aria-current="page"
+                >
                   Books
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="addbook" className="nav-link">
+                <Link to="/books/addbook" className="nav-link">
                   Add a book
                 </Link>
               </li>
@@ -52,14 +56,10 @@ function Header() {
                 placeholder="Search"
                 aria-label="Search"
                 id="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-              <button
-                className="btn btn-outline-success"
-                type="submit"
-                onClick={searchBooks}
-              >
-                Search books
-              </button>
+              <Link to={"/books/" + search}>Search</Link>
             </form>
           </div>
         </div>

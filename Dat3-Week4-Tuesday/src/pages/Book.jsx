@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 function Book() {
   const { id } = useParams();
-  const book = bookFacade.findBook(id);
+  const book = bookFacade.findBook(id) || window.location.replace("/NotFound");
 
   return (
     <>
@@ -13,9 +13,9 @@ function Book() {
       <div className="container">
         <div className="card">
           <div className="card-body">
-            <p>Book id: {book.id}</p>
-            <p>Book title: {book.title}</p>
-            <p>Book info: {book.info}</p>
+            <p>Book id: {book?.id}</p>
+            <p>Book title: {book?.title}</p>
+            <p>Book info: {book?.info}</p>
           </div>
         </div>
       </div>

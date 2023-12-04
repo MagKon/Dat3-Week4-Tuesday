@@ -13,10 +13,11 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Books />}>
+          <Route path="/books" element={<Books />}>
             <Route path=":id" element={<Book />} />
             <Route path="addbook" element={<AddBook />} />
           </Route>
+          <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </BrowserRouter>
     </>
